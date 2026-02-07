@@ -1,0 +1,384 @@
+:root { 
+  --gap: 14px; 
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+body { 
+  margin: 0; 
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+  color: #111; 
+}
+
+/* ================= Header ================= */
+
+.header {
+  padding: 16px 16px 10px;
+  border-bottom: 1px solid #e6e6e6;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* ✅ ensure header stays above Leaflet when scrolling */
+}
+
+/* ✅ Title left + toggle center + legend right */
+.headerTop{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 16px;
+}
+
+.header__title h1 { 
+  margin: 0 0 4px; 
+  font-size: 18px; 
+}
+
+.header__title p { 
+  margin: 0; 
+  color: #444; 
+  font-size: 13px; 
+}
+
+/* ✅ Toggle slot */
+.headerControls{
+  justify-self: center;
+  align-self: start;
+  margin-top: 2px;
+}
+
+/* Tiny toggle button style (JS uses these classes) */
+.mapToggleBtn{
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  cursor: pointer;
+  font: 12px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.mapToggleBtn:hover{
+  background: #f7f7f7;
+}
+
+/* ✅ Legend: two rows (CCC on top, Inspired-by below) */
+.legend{
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 2px;
+  font-size: 14px;
+  color: #111;
+  white-space: nowrap;
+}
+
+.legend__row{
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.legend__item{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Dots (CCC) */
+.legend__dot{
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+.legend__dot--culture{ background: #2b6cb0; }
+.legend__dot--commerce{ background: #2f855a; }
+.legend__dot--conquest{ background: #c53030; }
+
+/* Dashed lines (Inspired by) */
+.legend__line{
+  width: 40px;
+  height: 0;
+  border-top: 4px dashed;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+.legend__line--christianity{ border-top-color: #c53030; }
+.legend__line--islam{ border-top-color: #2f855a; }
+
+/* Centre the CCC row over the inspired-by row */
+.legend__row:first-child {
+  margin-right: 42px;
+}
+
+/* ================= Timeline ================= */
+
+.timeline { 
+  margin-top: 10px; 
+  display: grid; 
+  gap: 8px; 
+}
+
+#periodRange { 
+  width: 100%; 
+}
+
+/* Period labels (2 lines) spread evenly under slider */
+.bands {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.25;
+  color: #666;
+}
+
+.bands span {
+  text-align: center;
+  padding: 6px 4px;
+  border-bottom: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bands span:hover {
+  background: #f5f5f5;
+}
+
+.bands span:focus {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
+.bands strong {
+  display: block;
+  font-weight: 500;
+}
+
+.bands em {
+  display: block;
+  font-style: normal;
+  font-size: 10px;
+  color: #888;
+}
+
+.bands span.active {
+  color: #0b4f6c;
+  font-weight: 700;
+  background: #e6f2fa;
+  border-bottom-color: transparent;
+}
+
+.bands span.active em {
+  color: #0b4f6c;
+}
+
+/* ================= Layout ================= */
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--gap);
+  padding: var(--gap);
+  align-items: start;
+}
+
+.mapWrap { 
+  min-height: 70vh; 
+}
+
+#map { 
+  width: 100%; 
+  height: 72vh; 
+  border-radius: 10px; 
+  border: 1px solid #e6e6e6; 
+  overflow: hidden; 
+  position: relative;
+  z-index: 1; /* ✅ keep map under header */
+}
+
+/* ================= Side Panel ================= */
+
+.panel {
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  min-height: 72vh;
+}
+
+.panel h2 { 
+  margin: 0 0 10px; 
+  font-size: 16px; 
+}
+
+.panelBody { 
+  font-size: 14px; 
+  color: #222; 
+}
+
+.panelBody p { 
+  margin-top: 0; 
+}
+
+/* ================= Attribution ================= */
+
+.attribution { 
+  margin: 8px 2px 0; 
+  font-size: 12px; 
+  color: #555; 
+}
+
+.attribution a { 
+  color: inherit; 
+}
+
+/* ================= Hover tooltip with thumbnail (Leaflet) ================= */
+
+.hover-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.leaflet-interactive:focus {
+  outline: none !important;
+}
+
+.hover-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 16px;
+  padding: 14px;
+  max-width: 420px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.hover-thumb {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex: 0 0 auto;
+  border: 1px solid #e6e6e6;
+}
+
+.hover-meta {
+  min-width: 0;
+}
+
+.hover-title {
+  font-weight: 800;
+  margin-bottom: 6px;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.hover-text {
+  font-size: 12px;
+  line-height: 1.25;
+  color: #333;
+  opacity: 0.92;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ================= Right panel image grid ================= */
+
+.panel-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.panel-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 900px) {
+  .layout { 
+    grid-template-columns: 1fr; 
+  }
+
+  #map,
+  .panel { 
+    min-height: 55vh; 
+    height: 55vh; 
+  }
+
+  .bands {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 8px;
+  }
+
+  .hover-card {
+    max-width: 260px;
+  }
+
+  .hover-thumb {
+    width: 60px;
+    height: 60px;
+  }
+
+  .panel-images {
+    grid-template-columns: 1fr;
+  }
+
+  .legend{
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .legend__row{
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .legend__dot{
+    width: 14px;
+    height: 14px;
+  }
+
+  .legend__line{
+    width: 34px;
+    border-top-width: 3px;
+  }
+
+  /* On mobile, let controls sit below title if needed */
+  .headerTop{
+    grid-template-columns: 1fr;
+  }
+  .headerControls{
+    justify-self: start;
+  }
+}
