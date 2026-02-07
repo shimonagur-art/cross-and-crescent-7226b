@@ -95,7 +95,7 @@ function ensureMapControls() {
 
 function initMap() {
   // keep setView as requested
-  map = L.map("map", { scrollWheelZoom: false }).setView([43.5, 8.5], 3.5);
+  map = L.map("map", { scrollWheelZoom: false }).setView([43.5, 8.5], 3);
 
   baseLayer = L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png",
